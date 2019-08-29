@@ -11,11 +11,11 @@ namespace MVC_GeneralStore.Controllers
 {
     public class CustomerController : Controller
     {
-        private ApplicationDbContext _dbCustomer = new ApplicationDbContext();
+        private ApplicationDbContext _db = new ApplicationDbContext();
         // GET: Customer
         public ActionResult Index()
         {
-            List<Customer> customerList = _dbCustomer.Customers.ToList();
+            List<Customer> customerList = _db.Customers.ToList();
             List<Customer> orderedList = customerList.OrderBy(cust => cust.FullName).ToList();
             return View(orderedList);
         }
@@ -31,10 +31,11 @@ namespace MVC_GeneralStore.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create (Customer customer)
         {
+            // ModelState is not valid if teh data is corrupt in any way or if there is any change of a duplicate key
             if (ModelState.IsValid)
             {
-                _dbCustomer.Customers.Add(customer);
-                _dbCustomer.SaveChanges();
+                _db.Customers.Add(customer);
+                _db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(customer);
@@ -47,7 +48,7 @@ namespace MVC_GeneralStore.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = _dbCustomer.Customers.Find(id);
+            Customer customer = _db.Customers.Find(id);
             if(customer == null)
             {
                 return (HttpNotFound());
@@ -60,14 +61,14 @@ namespace MVC_GeneralStore.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
-            Customer customer = _dbCustomer.Customers.Find(id);
+            Customer customer = _db.Customers.Find(id);
 
             if(customer == null)
             {
                 return HttpNotFound();
             }
-            _dbCustomer.Customers.Remove(customer);
-            _dbCustomer.SaveChanges();
+            _db.Customers.Remove(customer);
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -78,7 +79,7 @@ namespace MVC_GeneralStore.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = _dbCustomer.Customers.Find(id);
+            Customer customer = _db.Customers.Find(id);
             if(customer == null)
             {
                 return HttpNotFound();
@@ -93,8 +94,8 @@ namespace MVC_GeneralStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                _dbCustomer.Entry(customer).State = EntityState.Modified;
-                _dbCustomer.SaveChanges();
+                _db.Entry(customer).State = EntityState.Modified;
+                _db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(customer);
@@ -107,7 +108,7 @@ namespace MVC_GeneralStore.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = _dbCustomer.Customers.Find(id);
+            Customer customer = _db.Customers.Find(id);
 
             if(customer == null)
             {
