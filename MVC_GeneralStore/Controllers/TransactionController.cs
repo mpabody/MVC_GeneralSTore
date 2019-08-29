@@ -55,7 +55,7 @@ namespace MVC_GeneralStore.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Transaction transaction = _db.Transactions.Find(id);
-            if(transaction == null)
+            if (transaction == null)
             {
                 return (HttpNotFound());
             }
@@ -66,11 +66,11 @@ namespace MVC_GeneralStore.Controllers
         // POST : Transaction/Delete/{id}
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete (int id)
+        public ActionResult Delete(int id)
         {
             Transaction transaction = _db.Transactions.Find(id);
 
-            if(transaction == null)
+            if (transaction == null)
             {
                 return HttpNotFound();
             }
@@ -125,6 +125,16 @@ namespace MVC_GeneralStore.Controllers
                 return HttpNotFound();
             }
             return View(transaction);
+        }
+
+        // GET : 
+        public ActionResult MoreThan()
+        {
+            // Get result of _db.Transaction query
+            // Raw SQL query
+            var purchases = _db.Transactions
+            .SqlQuery("SELECT * From Transactions WHERE Quantity > 2").ToList();
+            return View(purchases);
         }
     }
 }

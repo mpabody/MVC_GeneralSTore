@@ -188,6 +188,10 @@
     <Compile Include="Migrations\201908282254018_transactionDb.Designer.cs">
       <DependentUpon>201908282254018_transactionDb.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908290054058_QuantityField.cs" />
+    <Compile Include="Migrations\201908290054058_QuantityField.Designer.cs">
+      <DependentUpon>201908290054058_QuantityField.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -199,6 +203,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\grocery.jpg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -264,15 +269,15 @@
     <Content Include="Views\Customer\Delete.cshtml" />
     <Content Include="Views\Customer\Details.cshtml" />
     <Content Include="Views\Customer\Edit.cshtml" />
-    <Content Include="Views\Transaction\Index.cshtml" />
+    <Content Include="Views\Transaction\Details.cshtml" />
     <Content Include="Views\Transaction\Create.cshtml" />
     <Content Include="Views\Transaction\Delete.cshtml" />
     <Content Include="Views\Transaction\Edit.cshtml" />
-    <Content Include="Views\Transaction\Details.cshtml" />
+    <Content Include="Views\Transaction\Index.cshtml" />
+    <Content Include="Views\Transaction\MoreThan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="assets\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -296,6 +301,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908282254018_transactionDb.resx">
       <DependentUpon>201908282254018_transactionDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908290054058_QuantityField.resx">
+      <DependentUpon>201908290054058_QuantityField.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

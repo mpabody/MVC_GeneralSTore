@@ -26,3 +26,6 @@ textarea {
     background-image: url('../assets/grocery.jpg');
     color: white;
 }
+.premiumHeader {
+    text-align:center;
+}
